@@ -32,18 +32,20 @@
 					<th>5 Star Rating</th>
 				</tr>
 				<tbody>
-          <tr *ngFor='let product of products'>
-            <td>
-              <img *ngIf='showImage' [src]='product.imageUrl'
+					<tr *ngFor='let product of products'>
+						<td>
+							<img *ngIf='showImage' [src]='product.imageUrl'
               [title]='product.productName'
               [style.width.px]='imageWidth'
               [style.margin.px]='imageMargin'>
             </td>
-            <td>{{product.productName}}</td>
-            <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
-            <td>{{product.releaseDate}}</td>
-            <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
-            <td><pm-star> [rating] = 'product.starRating'</pm-star></td>
+						<td>{{product.productName}}</td>
+						<td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
+						<td>{{product.releaseDate}}</td>
+						<td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
+						<td>
+							<pm-star> [rating] = 'product.starRating'</pm-star>
+						</td>
 				</tbody>
 			</table>
 		</div>
