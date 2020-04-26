@@ -1,10 +1,11 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: "convertToSpaces"
+  name: 'convertToSpaces'
 })
 export class ConvertToSpacesPipe implements PipeTransform {
+
   transform(value: string, character: string): string {
-    return;
+    return value.replace(character, ' ');
   }
 }

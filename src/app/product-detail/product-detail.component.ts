@@ -1,15 +1,40 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+
 import { IProduct } from "../product-list/product";
+import { ProductService } from "../product-list/product.service";
 
 @Component({
-  //selector is removed here because we dont need to nested this component.
   templateUrl: "./product-detail.component.html",
   styleUrls: ["./product-detail.component.css"]
 })
 export class ProductDetailComponent implements OnInit {
-  pageTitle: "Product Detail";
-  product: IProduct[];
-  constructor() {}
+  pageTitle = "Product Detail";
+  errorMessage = "";
+  product: IProduct | undefined;
 
-  ngOnInit() {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit() {
+    const param = this.route.snapshot.paramMap.get("id");
+    if (param) {
+      const id = +param;
+      this.getProduct(id);
+    }
+  }
+
+  getProduct(id: number) {
+    this.productService.getProduct(id).subscribe({
+      next: product => (this.product = product),
+      error: err => (this.errorMessage = err)
+    });
+  }
+
+  onBack(): void {
+    this.router.navigate(["/products"]);
+  }
 }
